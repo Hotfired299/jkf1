@@ -1,11 +1,35 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sedang dialihkan...</title>
 
-  <!-- 🟩 Meta Pixel Code -->
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+    }
+    .logo {
+      width: 200px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+    h2 {
+      font-size: 20px;
+      font-weight: 500;
+    }
+  </style>
+
+  <!-- Meta Pixel Code -->
   <script>
   !function(f,b,e,v,n,t,s)
   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -23,39 +47,19 @@
     src="https://www.facebook.com/tr?id=1704160510236989&ev=PageView&noscript=1"/>
   </noscript>
   <!-- End Meta Pixel Code -->
-
-  <style>
-    body {
-      background-color: #000;
-      color: #fff;
-      font-family: "Poppins", sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-    }
-    img {
-      width: 150px;
-      height: auto;
-      margin-bottom: 25px;
-      object-fit: contain;
-    }
-    h2 {
-      font-size: 20px;
-      font-weight: 500;
-    }
-  </style>
 </head>
 <body>
-  <img src="https://i.ibb.co/9dab9002-8ee6-4f4a-96f8-63fd68d33ea3.png" alt="RITZ99 Logo">
+
+  <!-- logo -->
+  <img src="https://i.ibb.co/9W2Gzt6/9dab9002-8ee6-4f4a-96f8-63fd68d33ea3.png" alt="RITZ99 Logo" class="logo">
+
   <h2>Sedang dialihkan ke RITZ99<br>150% Welcome Bonus...</h2>
 
   <script>
-    setTimeout(() => {
-      fbq('track', 'ViewContent');
-      fbq('track', 'Lead');
+    setTimeout(function(){
+      try {
+        fbq('track', 'Lead');
+      } catch(e){}
       window.location.href = "https://ritz99.net/RFRITZ99JKF1";
     }, 3000);
   </script>
