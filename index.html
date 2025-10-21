@@ -8,7 +8,7 @@
   <style>
     body {
       margin: 0;
-      background-color: #1b1b1b;
+      background-color: #000;
       color: #e0e0e0;
       font-family: "Segoe UI", sans-serif;
       display: flex;
@@ -18,21 +18,32 @@
       height: 100vh;
       text-align: center;
     }
+
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      max-width: 420px;
+      padding: 20px;
+    }
+
     .logo {
-      width: 280px;
-      max-width: 90%;
+      width: 100%;
       height: auto;
       object-fit: contain;
-      filter: drop-shadow(0 0 8px #00ff66);
-      animation: pulse 2s infinite;
+      filter: drop-shadow(0 0 10px #00ff80);
+      animation: glow 3s infinite ease-in-out;
     }
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 0.9; }
-      50% { transform: scale(1.05); opacity: 1; }
-      100% { transform: scale(1); opacity: 0.9; }
+
+    @keyframes glow {
+      0% { opacity: 0.9; filter: drop-shadow(0 0 6px #00ff80); }
+      50% { opacity: 1; filter: drop-shadow(0 0 15px #00ff80); }
+      100% { opacity: 0.9; filter: drop-shadow(0 0 6px #00ff80); }
     }
+
     p {
-      margin-top: 20px;
+      margin-top: 25px;
       font-size: 18px;
       color: #bfbfbf;
     }
@@ -48,7 +59,7 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1704160510236989'); // 你的 Pixel ID
+    fbq('init', '1704160510236989');
     fbq('track', 'PageView');
   </script>
   <noscript>
@@ -59,11 +70,13 @@
 </head>
 
 <body>
-  <img class="logo" src="https://i.ibb.co/pv8WzgfV/logo.png" alt="RITZ99 Logo">
+  <div class="logo-container">
+    <img class="logo" src="https://i.ibb.co/pv8WzgfV/logo.png" alt="RITZ99 Logo">
+  </div>
   <p>Sedang dialihkan ke laman rasmi RITZ99...</p>
 
   <script>
-    // 追踪点击事件 + 3秒后自动跳转
+    // 延迟3秒自动跳转并记录Pixel事件
     setTimeout(function() {
       fbq('track', 'ViewContent');
       window.location.href = "https://ritz99.net/RFRITZ99JKF1";
