@@ -1,1 +1,69 @@
-<script src="https://plugin-code.salesmartly.com/js/project_332062_555101_1763220220.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Landing Page</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .btn-wrap {
+      position: absolute;
+      bottom: 40px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    .cta-btn {
+      background: #25d366;
+      color: #fff;
+      padding: 14px 26px;
+      border-radius: 50px;
+      font-size: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+      if (/Mobi|Android/i.test(navigator.userAgent)) {
+    window.location.href = "你的手机版链接";
+} else {
+    window.location.href = "你的PC版链接";
+}
+
+    }
+  </style>
+</head>
+<body>
+  <div id="tapToStart" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#000;display:flex;align-items:center;justify-content:center;color:#fff;font-size:26px;cursor:pointer;z-index:10;">点击播放影片</div>
+
+  <video id="vid" playsinline style="width:100%;height:100%;object-fit:cover;">
+    <source src="data:video/mp4;base64,AAAAIGZ0eXBpc29tAAACAGlzb21pc28yYXZjMW1wNDEAAAAIZnJlZQAAMbttb2...0AAABRAAAAZQAAAHkAAACNAAAAoQAAALUAAADJAAAA3QAAAPEAAAEFAAABGQAA" type="video/mp4">
+  </video>
+
+  <script>
+    const tap=document.getElementById('tapToStart');
+    const vid=document.getElementById('vid');
+    tap.onclick=function(){
+        vid.muted=false;
+        vid.play();
+        tap.style.display='none';
+    };
+  </script>
+
+  <div class="btn-wrap">
+    <a class="cta-btn" href="https://wa.me/yourtempchat" target="_blank">contect us</a>
+  </div>
+  <script src="https://plugin-code.salesmartly.com/js/project_332062_555101_1763220220.js"></script>
+</body>
+</html>
