@@ -61,9 +61,13 @@ font-size:36px;
 font-weight:900;
 color:#ffda44;
 }
-.flags{
-position:fixed;bottom:70px;left:0;width:100%;
-overflow:hidden;
+.flag{
+width:60px;
+height:40px;
+object-fit:cover;
+border-radius:8px;
+box-shadow:0 0 10px rgba(255,255,255,.3);
+flex-shrink:0;
 }
 .track{
 display:flex;gap:18px;width:max-content;
@@ -79,6 +83,11 @@ position:fixed;bottom:15px;width:100%;
 text-align:center;font-weight:bold;
 }
 @media (max-width:768px){
+.flag{
+width:45px;
+height:30px;
+}
+}
 
 .hero{
 padding:30px 15px 140px;
@@ -195,17 +204,31 @@ padding:0 10px;
 <a class="btn" href="https://ritz99.net/RFR99F1">REGISTER NOW</a>
 </div>
 
-<div class="flags">
 <div class="track">
-<span class="flag">🇧🇷</span><span class="flag">🇦🇷</span><span class="flag">🇫🇷</span>
-<span class="flag">🇩🇪</span><span class="flag">🇪🇸</span><span class="flag">🇵🇹</span>
-<span class="flag">🇳🇱</span><span class="flag">🇧🇪</span><span class="flag">🇭🇷</span>
-<span class="flag">🇯🇵</span><span class="flag">🇰🇷</span><span class="flag">🇺🇸</span>
-<span class="flag">🇲🇽</span><span class="flag">🇨🇦</span><span class="flag">🇦🇺</span>
-<span class="flag">🇲🇦</span><span class="flag">🇨🇭</span><span class="flag">🇵🇱</span>
-<span class="flag">🇧🇷</span><span class="flag">🇦🇷</span><span class="flag">🇫🇷</span>
-<span class="flag">🇩🇪</span><span class="flag">🇪🇸</span><span class="flag">🇵🇹</span>
-<span class="flag">🇳🇱</span><span class="flag">🇧🇪</span><span class="flag">🇭🇷</span>
+
+<img class="flag" src="https://flagcdn.com/w80/br.png" alt="Brazil">
+<img class="flag" src="https://flagcdn.com/w80/ar.png" alt="Argentina">
+<img class="flag" src="https://flagcdn.com/w80/fr.png" alt="France">
+<img class="flag" src="https://flagcdn.com/w80/de.png" alt="Germany">
+<img class="flag" src="https://flagcdn.com/w80/es.png" alt="Spain">
+<img class="flag" src="https://flagcdn.com/w80/pt.png" alt="Portugal">
+<img class="flag" src="https://flagcdn.com/w80/nl.png" alt="Netherlands">
+<img class="flag" src="https://flagcdn.com/w80/be.png" alt="Belgium">
+<img class="flag" src="https://flagcdn.com/w80/hr.png" alt="Croatia">
+<img class="flag" src="https://flagcdn.com/w80/jp.png" alt="Japan">
+<img class="flag" src="https://flagcdn.com/w80/kr.png" alt="South Korea">
+<img class="flag" src="https://flagcdn.com/w80/us.png" alt="USA">
+<img class="flag" src="https://flagcdn.com/w80/mx.png" alt="Mexico">
+<img class="flag" src="https://flagcdn.com/w80/ca.png" alt="Canada">
+<img class="flag" src="https://flagcdn.com/w80/au.png" alt="Australia">
+
+<!-- 重复一次让滚动无缝 -->
+<img class="flag" src="https://flagcdn.com/w80/br.png" alt="Brazil">
+<img class="flag" src="https://flagcdn.com/w80/ar.png" alt="Argentina">
+<img class="flag" src="https://flagcdn.com/w80/fr.png" alt="France">
+<img class="flag" src="https://flagcdn.com/w80/de.png" alt="Germany">
+<img class="flag" src="https://flagcdn.com/w80/es.png" alt="Spain">
+
 </div>
 </div>
 
