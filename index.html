@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RITZ99 // OFFICIAL PARTNER</title>
+    <title>RITZ99 // The Ultimate Mind Game</title>
     
+    <!-- 1. Meta Pixel 追踪代码放置处 (将你的 ID 替换掉下面的 XXXXXXXXXXXXXXX) -->
     <script>
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -17,189 +18,97 @@
       fbq('init', 'XXXXXXXXXXXXXXX'); 
       fbq('track', 'PageView');
     </script>
-    
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=XXXXXXXXXXXXXXX&ev=PageView&noscript=1"/></noscript>
+    <!-- End Meta Pixel -->
+
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
-        body { 
-            background-color: #05160e; /* 改为契合你图片的暗绿色底色 */
-            color: #ffffff; 
-            overflow-x: hidden; 
-            background-image: radial-gradient(circle, rgba(0,255,100,0.05) 1px, transparent 1px);
-            background-size: 30px 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
+        body { background-color: #0a051b; color: #ffffff; overflow-x: hidden; background-image: linear-gradient(rgba(128, 0, 128, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(128, 0, 128, 0.05) 1px, transparent 1px); background-size: 40px 40px; }
+        .neon-text { color: #fff; text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #8a2be2; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        header { padding: 30px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0, 255, 255, 0.2); }
+        .logo { font-size: 24px; font-weight: bold; letter-spacing: 2px; background: linear-gradient(45deg, #00ffff, #8a2be2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero { padding: 100px 0; text-align: center; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; letter-spacing: 3px; }
+        .hero p { font-size: 1.2rem; color: #b0a8d4; max-width: 600px; margin: 0 auto 40px auto; line-height: 1.6; }
+        .btn-cyber { display: inline-block; padding: 15px 40px; font-size: 1rem; font-weight: bold; text-transform: uppercase; text-decoration: none; color: #00ffff; border: 2px solid #00ffff; background: transparent; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 0 10px rgba(0, 255, 255, 0.3); }
+        .btn-cyber:hover { color: #0a051b; background: #00ffff; box-shadow: 0 0 25px #00ffff; }
+        .features { padding: 80px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { background: rgba(13, 8, 34, 0.7); border: 1px solid rgba(138, 43, 226, 0.3); border-radius: 8px; padding: 40px 30px; text-align: center; transition: all 0.3s ease; position: relative; overflow: hidden; }
+        .card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, #00ffff, #8a2be2); }
+        .card:hover { transform: translateY(-5px); border-color: #00ffff; box-shadow: 0 5px 20px rgba(0, 255, 255, 0.1); }
+        .card h3 { font-size: 1.5rem; margin-bottom: 15px; color: #00ffff; }
+        .card p { color: #a29bbd; font-size: 0.95rem; line-height: 1.6; }
+        .cta-section { padding: 80px 0; text-align: center; background: linear-gradient(180deg, transparent, rgba(138, 43, 226, 0.1)); border-top: 1px solid rgba(138, 43, 226, 0.2); }
+        .form-container { margin-top: 30px; display: flex; justify-content: center; gap: 10px; }
+        .form-container input { padding: 15px 20px; width: 300px; background: rgba(0, 0, 0, 0.5); border: 1px solid #8a2be2; color: #fff; font-size: 1rem; }
+        .form-container input:focus { outline: none; border-color: #00ffff; box-shadow: 0 0 10px rgba(0, 255, 255, 0.5); }
+        .btn-purple { padding: 15px 30px; background: #8a2be2; color: white; border: none; font-weight: bold; cursor: pointer; transition: all 0.3s ease; }
+        .btn-purple:hover { background: #a046f5; box-shadow: 0 0 15px #8a2be2; }
         
-        header { width: 100%; padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0, 255, 100, 0.2); max-width: 600px; }
-        .logo { font-size: 24px; font-weight: bold; color: #00ff66; text-shadow: 0 0 10px #00ff66; }
-        
-        .main-container { max-width: 600px; width: 100%; padding: 20px; text-align: center; flex: 1; }
-        
-        /* 标语区 */
-        .headline { font-size: 1.8rem; margin: 20px 0 10px 0; color: #fff; font-weight: 800; }
-        .subheadline { font-size: 1rem; color: #a0c0b0; margin-bottom: 30px; }
-        .highlight { color: #ffcc00; text-shadow: 0 0 5px #ffcc00; }
-
-        /* 幸运大转盘基础结构 */
-        .wheel-wrapper { position: relative; width: 320px; height: 320px; margin: 0 auto 40px auto; }
-        #wheel { width: 100%; height: 100%; transform: rotate(0deg); transition: transform 4s cubic-bezier(0.1, 0.8, 0.1, 1); }
-        
-        /* 指针 */
-        .pointer { 
-            position: absolute; width: 60px; height: 60px; 
-            top: 50%; left: 50%; transform: translate(-50%, -50%); 
-            z-index: 10; cursor: pointer;
-            background: #ffcc00; border-radius: 50%;
-            display: flex; justify-content: center; align-items: center;
-            font-weight: bold; color: #000; font-size: 0.9rem;
-            box-shadow: 0 0 15px #ffcc00;
-            border: 3px solid #fff;
-        }
-        .pointer::after {
-            content: ''; position: absolute; top: -15px; left: 17px;
-            width: 0; height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-bottom: 18px solid #ffcc00;
-        }
-
-        /* 弹窗样式 */
-        .pop-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 100; display: none; justify-content: center; align-items: center; padding: 20px; }
-        .pop-box { background: #0c2b1c; border: 2px solid #00ff66; border-radius: 12px; padding: 30px; text-align: center; max-width: 400px; width: 100%; box-shadow: 0 0 30px rgba(0,255,100,0.3); animation: popIn 0.3s ease; }
-        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        
-        .pop-box h2 { color: #ffcc00; font-size: 2rem; margin-bottom: 15px; text-shadow: 0 0 10px rgba(255,204,0,0.5); }
-        .pop-box p { color: #fff; margin-bottom: 25px; font-size: 1.1rem; line-height: 1.5; }
-        
-        .btn-claim { display: block; width: 100%; padding: 15px; background: linear-gradient(90deg, #ffcc00, #ff9900); color: #000; font-size: 1.2rem; font-weight: bold; text-decoration: none; border-radius: 6px; box-shadow: 0 5px 15px rgba(255,153,0,0.4); text-transform: uppercase; transition: all 0.2s; }
-        .btn-claim:hover { transform: translateY(-2px); box-shadow: 0 7px 20px rgba(255,153,0,0.6); }
-
-        /* 特性标签 */
-        .badges { display: flex; justify-content: space-around; margin-top: 20px; font-size: 0.8rem; color: #608070; }
-        .badge-item { display: flex; align-items: center; gap: 5px; }
-
-        footer { margin-top: auto; padding: 30px 20px; font-size: 0.75rem; color: #40554b; width: 100%; text-align: center; border-top: 1px solid rgba(255,255,255,0.02); max-width: 600px;}
-        footer a { color: #608070; text-decoration: none; margin: 0 5px; }
+        /* 底部合规样式 */
+        footer { background: #05020f; padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.8rem; color: #666; text-align: center; line-height: 1.8; }
+        footer a { color: #8a2be2; text-decoration: none; margin: 0 10px; }
+        footer a:hover { color: #00ffff; }
+        .compliance-box { max-width: 800px; margin: 0 auto 20px auto; padding: 0 20px; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">RITZ99</div>
-        <div style="color: #00ff66; font-size: 0.8rem; font-weight: bold;">● LUCKY SPIN</div>
+        <div class="container" style="display: flex; justify-content: space-between; width: 100%;">
+            <div class="logo">RITZ99</div>
+            <div style="color: #00ffff; font-size: 0.8rem; letter-spacing: 1px;">SERVER: MY-KUL // ONLINE</div>
+        </div>
     </header>
 
-    <div class="main-container">
-        <h1 class="headline">MAIN SEKARANG,<br>HADIAH MISTERI <span class="highlight">MENANTI ANDA!</span></h1>
-        <p class="subheadline">Putar roda secara percuma & tebus bonus eksklusif anda hari ini!</p>
-
-        <div class="wheel-wrapper">
-            <div class="pointer" id="spin-trigger">SPIN</div>
-            <canvas id="wheel" width="320" height="320"></canvas>
+    <section class="hero">
+        <div class="container">
+            <h1 class="neon-text">RITZ99 // 触手可及的终极博弈</h1>
+            <p>拒绝平庸，加入属于顶尖玩家的电竞新纪元。策略、操作与速度的绝对较量，你准备好了吗？</p>
+            <a href="#join" class="btn-cyber" onclick="fbq('track', 'Lead');">立即加入内测 / JOIN BETA</a>
         </div>
+    </section>
 
-        <div class="badges">
-            <div class="badge-item">🔒 SAFE & SECURE</div>
-            <div class="badge-item">⚡ INSTANT TOP UP</div>
-            <div class="badge-item">⭐ TRUSTED PLATFORM</div>
+    <section class="container features">
+        <div class="card">
+            <h3>【 巅峰对决 】</h3>
+            <p>纯粹的竞技策略，拒绝数值压制。在每一次交锋中算计对手，每一步都是智商与心理的极致博弈。</p>
         </div>
-    </div>
-
-    <div class="pop-overlay" id="result-pop">
-        <div class="pop-box">
-            <h2>TAHNIAH! 🎉</h2>
-            <p>Anda telah memenangi:<br><span style="font-size: 1.8rem; font-weight: 800; color: #00ff66; display:block; margin: 10px 0;">50% WELCOME BONUS</span></p>
-            <a href="https://ritz99.net/RFR99F1" class="btn-claim" id="claim-link">CLAIM NOW</a>
+        <div class="card">
+            <h3>【 赛博生态 】</h3>
+            <p>专为硬核玩家打造的数字化电竞社区。在这里用实力说话，赢取属于你的独家荣耀。</p>
         </div>
-    </div>
+        <div class="card">
+            <h3>【 瞬息万变 】</h3>
+            <p>完美融合卡牌、棋子与博弈宝石元素。战场局势瞬息万变，唯有洞察全局者方能笑到最后。</p>
+        </div>
+    </section>
 
+    <section class="cta-section" id="join">
+        <div class="container">
+            <h2 style="font-size: 2rem; margin-bottom: 10px;">霓虹永不熄灭，传奇由你书写</h2>
+            <p style="color: #a29bbd;">立即留下联系方式，锁定首批核心测试席位。</p>
+            <div class="form-container">
+                <input type="email" placeholder="Enter your email address...">
+                <button class="btn-purple" onclick="fbq('track', 'CompleteRegistration'); alert('席位已锁定！');">锁定席位</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 广告过审必备底部安全合规模块 -->
     <footer>
-        <p>Disclaimer: This game is for leisure simulation purposes only. Must be 18 years or older to play.</p>
-        <p style="margin-top: 5px;"><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        <div class="compliance-box">
+            <p><strong>Disclaimer / 免责声明:</strong> This website is for strategy demonstration and simulation gaming entertainment purposes only. No real money gambling is involved. Users must be 18 years or older to participate.</p>
+            <p style="margin-top: 10px;">&copy; 2026 RITZ99 Digital Entertainment. All Rights Reserved. </p>
+            <!-- 如果你有马来西亚注册公司，可以在这里写上: Company Name (SSM: XXXXXX-X) -->
+        </div>
+        <div>
+            <a href="#">Privacy Policy (隐私政策)</a> | 
+            <a href="#">Terms of Service (服务条款)</a> | 
+            <a href="#">Contact Us (联系我们)</a>
+        </div>
     </footer>
 
-    <script>
-        const canvas = document.getElementById('wheel');
-        const ctx = canvas.getContext('2d');
-        const spinTrigger = document.getElementById('spin-trigger');
-        const resultPop = document.getElementById('result-pop');
-        const wheelEl = document.getElementById('wheel');
-
-        // 奖项配置 (与你的图片奖项对应，确保包含 50% Welcome)
-        const rewards = [
-            "50% WELCOME", "DAILY FREE", "RM15 BONUS", "WEEKLY REBATE",
-            "RM10 SHARE", "DAILY 20%", "MONTHLY FREE", "TRY AGAIN"
-        ];
-        const colors = ['#0c2b1c', '#14422b', '#0c2b1c', '#14422b', '#0c2b1c', '#14422b', '#0c2b1c', '#14422b'];
-        const numSegments = rewards.length;
-        const segmentAngle = 360 / numSegments;
-
-        // 绘制转盘
-        function drawWheel() {
-            ctx.clearRect(0, 0, 320, 320);
-            for (let i = 0; i < numSegments; i++) {
-                const angle = (i * segmentAngle * Math.PI) / 180;
-                const nextAngle = ((i + 1) * segmentAngle * Math.PI) / 180;
-
-                ctx.beginPath();
-                ctx.moveTo(160, 160);
-                ctx.arc(160, 160, 150, angle, nextAngle);
-                ctx.fillStyle = colors[i];
-                ctx.fill();
-                ctx.lineWidth = 2;
-                ctx.strokeStyle = '#00ff66';
-                ctx.stroke();
-
-                // 绘制文字
-                ctx.save();
-                ctx.translate(160, 160);
-                ctx.rotate(angle + (segmentAngle * Math.PI) / 360);
-                ctx.fillStyle = '#ffffff';
-                ctx.font = 'bold 11px Arial';
-                ctx.textAlign = 'right';
-                ctx.fillText(rewards[i], 140, 5);
-                ctx.restore();
-            }
-            
-            // 外圈发光边框
-            ctx.beginPath();
-            ctx.arc(160, 160, 152, 0, 2 * Math.PI);
-            ctx.lineWidth = 4;
-            ctx.strokeStyle = '#ffcc00';
-            ctx.stroke();
-        }
-
-        drawWheel();
-
-        // 点击抽奖逻辑
-        let isSpinning = false;
-        spinTrigger.addEventListener('click', () => {
-            if (isSpinning) return;
-            isSpinning = true;
-            
-            // 触发 Meta Pixel 追踪：用户点击了 Spin，算作潜在线索(Lead)
-            if(typeof fbq === 'function') { fbq('track', 'Lead'); }
-
-            // 核心锁死逻辑：强制让转盘停在第一个奖项 "50% WELCOME"
-            // Canvas逆时针计算，目标区间在正上方指针处。5个整圈(1800度) + 修正角度
-            const targetDegrees = 1800 + (360 - (segmentAngle / 2)); 
-            
-            wheelEl.style.transform = `rotate(${targetDegrees}deg)`;
-
-            // 4秒动画结束后弹出中奖提示
-            setTimeout(() => {
-                resultPop.style.display = 'flex';
-                // 触发 Meta Pixel 追踪：完成抽奖，算作完成注册意向
-                if(typeof fbq === 'function') { fbq('track', 'CompleteRegistration'); }
-            }, 4000);
-        });
-
-        // 拦截点击 Claim 按钮，在跳转前做好交接
-        document.getElementById('claim-link').addEventListener('click', () => {
-            // 这里可以添加最终转化追踪
-        });
-    </script>
 </body>
 </html>
