@@ -2,7 +2,6 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <!-- 强制移动端 1:1 比例渲染，防止用户双击导致画面缩放错位 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>RITZ99 // OFFICIAL PARTNER</title>
     
@@ -42,15 +41,35 @@
         
         .main-container { max-width: 600px; width: 100%; padding: 20px; text-align: center; flex: 1; }
         
+        /* 核心优化：大图直达链接与反馈样式 */
+        .banner-link {
+            display: block;
+            width: 100%;
+            text-decoration: none;
+            margin-bottom: 25px; /* 与下方转盘保持黄金比例间距 */
+        }
+        .promo-banner {
+            width: 100%; 
+            height: auto; 
+            border-radius: 10px;
+            border: 2px solid #ffcc00; 
+            box-shadow: 0 0 18px rgba(0, 255, 102, 0.25);
+            display: block;
+            transition: transform 0.15s;
+        }
+        .promo-banner:active {
+            transform: scale(0.98); /* 点击大图时有轻微按压反馈，提高真实质感 */
+        }
+
         /* 标语区 */
-        .headline { font-size: 1.8rem; margin: 20px 0 10px 0; color: #fff; font-weight: 800; }
+        .headline { font-size: 1.8rem; margin: 10px 0 10px 0; color: #fff; font-weight: 800; }
         .subheadline { font-size: 1rem; color: #a0c0b0; margin-bottom: 30px; }
         .highlight { color: #ffcc00; text-shadow: 0 0 5px #ffcc00; }
 
         /* 幸运大转盘基础结构 */
         .wheel-wrapper { position: relative; width: 320px; height: 320px; margin: 0 auto 40px auto; }
         
-        /* 增加平滑的物理阻尼效果：前快后慢 */
+        /* 平滑的物理阻尼效果：前快后慢 */
         #wheel { width: 100%; height: 100%; transform: rotate(0deg); transition: transform 4s cubic-bezier(0.1, 0.8, 0.1, 1); }
         
         /* 指针 */
@@ -100,6 +119,10 @@
     </header>
 
     <div class="main-container">
+        <a href="https://ritz99.net/RFR99F1" class="banner-link" id="banner-trigger">
+            <img src="https://static.gwvkyk.com/media/7c6a84e18f4a68652eee2.png" alt="RITZ99 Promotion" class="promo-banner">
+        </a>
+
         <h1 class="headline">MAIN SEKARANG,<br>HADIAH MISTERI <span class="highlight">MENANTI ANDA!</span></h1>
         <p class="subheadline">Putar roda secara percuma & tebus bonus eksklusif anda hari ini!</p>
 
@@ -132,6 +155,7 @@
         const canvas = document.getElementById('wheel');
         const ctx = canvas.getContext('2d');
         const spinTrigger = document.getElementById('spin-trigger');
+        const bannerTrigger = document.getElementById('banner-trigger');
         const resultPop = document.getElementById('result-pop');
         const wheelEl = document.getElementById('wheel');
 
@@ -168,9 +192,8 @@
                 let now = audioCtx.currentTime;
                 let osc = audioCtx.createOscillator();
                 let gain = audioCtx.createGain();
-                osc.type = 'triangle'; // 使用质感更加饱满的三角波
+                osc.type = 'triangle'; 
                 
-                // 模拟经典的连续电子上升音阶效果 (C5 -> E5 -> G5 -> C6)
                 osc.frequency.setValueAtTime(523.25, now);
                 osc.frequency.setValueAtTime(659.25, now + 0.1);
                 osc.frequency.setValueAtTime(783.99, now + 0.2);
@@ -232,6 +255,18 @@
 
         drawWheel();
 
+        // 统一上报逻辑
+        function reportPixel(eventName) {
+            if(typeof fbq === 'function') { 
+                fbq('track', eventName); 
+            }
+        }
+
+        // 用户点击大宣传图触发
+        bannerTrigger.addEventListener('click', () => {
+            reportPixel('Lead');
+        });
+
         // 点击抽奖逻辑
         let isSpinning = false;
         spinTrigger.addEventListener('click', () => {
@@ -241,8 +276,8 @@
             // 初始化声音系统
             initAudio();
             
-            // 触发 Meta Pixel 追踪
-            if(typeof fbq === 'function') { fbq('track', 'Lead'); }
+            // 触发 Meta Pixel 追踪（潜在线索）
+            reportPixel('Lead');
 
             // 核心锁死逻辑：强制停在第一个奖项 "50% WELCOME"
             const targetDegrees = 1800 + (360 - (segmentAngle / 2)); 
@@ -259,21 +294,18 @@
                 }
             }, 85); 
 
-            // 在后期转盘极慢趋近停止时，补丁两下孤独的“哒...哒...”，增加极度逼真的物理等待感
+            // 后期补丁“哒...哒...”，增加真实等待体验
             setTimeout(() => { playTickSound(); }, 2800);
             setTimeout(() => { playTickSound(); }, 3300);
 
             // 4秒动画结束：精准播放中奖爆灯音效并弹窗
             setTimeout(() => {
-                playWinSound(); // 触发爆分中奖声
+                playWinSound(); 
                 resultPop.style.display = 'flex';
                 
-                if(typeof fbq === 'function') { fbq('track', 'CompleteRegistration'); }
+                // 触发 Meta Pixel 追踪（完成抽奖意向）
+                reportPixel('CompleteRegistration');
             }, 4000);
-        });
-
-        document.getElementById('claim-link').addEventListener('click', () => {
-            // 保留转化交接
         });
     </script>
 </body>
