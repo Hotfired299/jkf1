@@ -2,11 +2,9 @@
 <html lang="ms">
 <head>
     <meta charset="UTF-8">
-    <!-- 核心：强制移动端按1:1比例渲染，禁止用户意外放大导致排版错乱 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>RITZ99 // OFFICIAL PARTNER</title>
     
-    <!-- Meta Pixel 追踪代码 -->
     <script>
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -106,7 +104,7 @@
             height: auto; 
             display: block;
             transform: rotate(0deg); 
-            transition: transform 4.5s cubic-bezier(0.15, 0.85, 0.1, 1); 
+            /* 去掉了原先的长过渡动画，使其更流畅或不需要等待 */
         }
         
         .pointer { 
@@ -127,7 +125,7 @@
 
         /* 中奖弹窗自适应 */
         .pop-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.94); z-index: 100; display: none; justify-content: center; align-items: center; padding: 15px; }
-        .pop-box { background: #072213; border: 2px solid #d4af37; border-radius: 12px; padding: 30px 20px; text-align: center; max-width: 360px; width: 100%; box-shadow: 0 0 35px rgba(212,175,55,0.4); animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .pop-box { background: #072213; border: 2px solid #d4af37; border-radius: 12px; padding: 30px 20px; text-align: center; max-width: 360px; width: 100%; box-shadow: 0 0 35px rgba(212,175,55,0.4); animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         @keyframes popIn { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         
         .pop-box h2 { color: #ffcc00; font-size: 2rem; margin-bottom: 10px; text-shadow: 0 0 15px rgba(255,204,0,0.6); font-weight: 900; }
@@ -163,16 +161,13 @@
     </header>
 
     <div class="main-container">
-        <!-- 自动适配各种屏幕尺寸的财神主视觉 -->
         <img src="https://static.gwvkyk.com/media/7c6a84e18f4a68652eee2.png" alt="RITZ99 Promotion" class="promo-banner">
 
         <h1 class="headline">MAIN SEKARANG,<br>HADIAH MISTERI <span class="highlight">MENANTI ANDA!</span></h1>
         <p class="subheadline">Putar roda secara percuma & tebus 50% Welcome Bonus anda sekarang!</p>
 
-        <!-- 自适应 Canvas 转盘结构 -->
         <div class="wheel-wrapper">
             <div class="pointer" id="spin-trigger">SPIN</div>
-            <!-- canvas原生宽高保持320用于保证画质清晰，css会负责缩小它 -->
             <canvas id="wheel" width="320" height="320"></canvas>
         </div>
 
@@ -183,7 +178,6 @@
         </div>
     </div>
 
-    <!-- 中奖弹窗 -->
     <div class="pop-overlay" id="result-pop">
         <div class="pop-box">
             <h2>TAHNIAH! 🎉</h2>
@@ -252,15 +246,14 @@
             if (isSpinning) return;
             isSpinning = true;
             
+            // 埋点触发：只要用户点下指针，Meta Pixel 抓取一次 Lead
             if(typeof fbq === 'function') { fbq('track', 'Lead'); }
 
-            const targetDegrees = 1800 + (360 - (segmentAngle / 2)); 
-            wheelEl.style.transform = `rotate(${targetDegrees}deg)`;
-
-            setTimeout(() => {
-                resultPop.style.display = 'flex';
-                if(typeof fbq === 'function') { fbq('track', 'CompleteRegistration'); }
-            }, 4500);
+            // 核心修改：去掉原先转动4.5秒再弹出的延迟，点击一瞬间直接把中奖弹窗展示出来！
+            resultPop.style.display = 'flex';
+            
+            // 同时触发像素完整注册事件
+            if(typeof fbq === 'function') { fbq('track', 'CompleteRegistration'); }
         });
     </script>
 </body>
