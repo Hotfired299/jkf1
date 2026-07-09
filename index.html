@@ -14,15 +14,15 @@
       t.src=v;s=b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t,s)}(window, document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', 'XXXXXXXXXXXXXXX'); 
+      fbq('init', 'XXXXXXXXXXXXXXX'); /* 请在此处替换您的真实像素ID */
       fbq('track', 'PageView');
     </script>
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
         
-        /* 避免手机端点击元素时出现蓝色高亮边框 */
-        input, textarea, button, a, div { -webkit-tap-highlight-color: rgba(0,0,0,0); }
+        /* 消除移动端点击元素时的系统默认蓝色高亮或边框 */
+        input, textarea, button, a, div { -webkit-tap-highlight-color: rgba(0,0,0,0); outline: none; }
 
         body { 
             background-color: #03140a; 
@@ -34,30 +34,30 @@
             min-height: 100vh;
         }
         
-        /* 背景图融合自适应 */
+        /* 全屏背景磨砂融合 */
         .bg-layer {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: url('https://static.gwvkyk.com/media/7c6a84e18f4a68652eee2.png') no-repeat center top;
             background-size: cover;
-            opacity: 0.12; 
+            opacity: 0.10; 
             z-index: -1;
         }
         
         header { 
             width: 100%; 
-            padding: 15px 20px; 
+            padding: 12px 20px; 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
             border-bottom: 1px solid rgba(212, 175, 55, 0.2); 
-            max-width: 500px; /* 锁定黄金单手操作宽度 */
+            max-width: 500px; 
             background: rgba(3, 20, 10, 0.85);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
         }
         .logo { 
-            font-size: 22px; 
+            font-size: 20px; 
             font-weight: bold; 
             color: #d4af37; 
             text-shadow: 0 0 10px rgba(212, 175, 55, 0.6); 
@@ -70,62 +70,66 @@
             padding: 15px; 
             text-align: center; 
             flex: 1;
-            background: rgba(3, 20, 10, 0.6); 
+            background: rgba(3, 20, 10, 0.5); 
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
         }
         
-        /* 完美自适应主图Banner */
-        .promo-banner {
-            width: 100%; 
-            height: auto; /* 关键：高度自动，防止小屏手机下图片被压扁 */
-            border-radius: 10px;
-            border: 2px solid #d4af37; 
-            box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
-            margin: 5px 0 15px 0; 
+        /* 核心优化：大图直达锚点样式 */
+        .banner-link {
             display: block;
+            width: 100%;
+            text-decoration: none;
+            margin-bottom: 25px; /* 与下方转盘保持黄金间距 */
         }
         
-        .headline { font-size: 1.45rem; margin: 15px 0 8px 0; color: #ffffff; font-weight: 800; line-height: 1.3; }
-        .subheadline { font-size: 0.9rem; color: #a0c2b0; margin-bottom: 20px; padding: 0 10px; }
-        .highlight { color: #ffcc00; text-shadow: 0 0 8px rgba(255, 204, 0, 0.6); }
+        .promo-banner {
+            width: 100%; 
+            height: auto; 
+            border-radius: 10px;
+            border: 2px solid #d4af37; 
+            box-shadow: 0 0 18px rgba(0, 255, 102, 0.25);
+            display: block;
+            transition: transform 0.2s;
+        }
+        .promo-banner:active {
+            transform: scale(0.98); /* 手机端点击时的轻微物理反馈，提高真实感 */
+        }
 
-        /* 转盘包裹区自适应 */
+        /* 转盘自适应包裹区 */
         .wheel-wrapper { 
             position: relative; 
             width: 100%; 
-            max-width: 310px; /* 限制最大尺寸防止在大屏上过大 */
+            max-width: 290px; 
             margin: 0 auto 25px auto; 
         }
         
-        /* 让大转盘 Canvas 随手机屏幕宽度弹性缩小 */
         #wheel { 
             width: 100%; 
             height: auto; 
             display: block;
             transform: rotate(0deg); 
-            /* 去掉了原先的长过渡动画，使其更流畅或不需要等待 */
         }
         
         .pointer { 
-            position: absolute; width: 60px; height: 60px; 
+            position: absolute; width: 58px; height: 58px; 
             top: 50%; left: 50%; transform: translate(-50%, -50%); 
             z-index: 10; cursor: pointer;
             background: linear-gradient(135deg, #ffe066, #d4af37); border-radius: 50%;
             display: flex; justify-content: center; align-items: center;
-            font-weight: 900; color: #03140a; font-size: 0.95rem;
+            font-weight: 900; color: #03140a; font-size: 0.9rem;
             box-shadow: 0 0 15px #d4af37; border: 3px solid #ffffff;
         }
         .pointer::after {
-            content: ''; position: absolute; top: -14px; left: 17px;
+            content: ''; position: absolute; top: -13px; left: 16px;
             width: 0; height: 0;
             border-left: 10px solid transparent; border-right: 10px solid transparent;
-            border-bottom: 18px solid #ffe066;
+            border-bottom: 17px solid #ffe066;
         }
 
-        /* 中奖弹窗自适应 */
+        /* 全屏中奖强力阻尼弹窗 */
         .pop-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.94); z-index: 100; display: none; justify-content: center; align-items: center; padding: 15px; }
-        .pop-box { background: #072213; border: 2px solid #d4af37; border-radius: 12px; padding: 30px 20px; text-align: center; max-width: 360px; width: 100%; box-shadow: 0 0 35px rgba(212,175,55,0.4); animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .pop-box { background: #072213; border: 2px solid #d4af37; border-radius: 12px; padding: 30px 20px; text-align: center; max-width: 350px; width: 100%; box-shadow: 0 0 35px rgba(212,175,55,0.4); animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         @keyframes popIn { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         
         .pop-box h2 { color: #ffcc00; font-size: 2rem; margin-bottom: 10px; text-shadow: 0 0 15px rgba(255,204,0,0.6); font-weight: 900; }
@@ -133,21 +137,17 @@
         
         .btn-claim { display: block; width: 100%; padding: 14px; background: linear-gradient(90deg, #ffe066, #d4af37); color: #03140a; font-size: 1.15rem; font-weight: bold; text-decoration: none; border-radius: 8px; box-shadow: 0 5px 15px rgba(212,175,55,0.4); text-transform: uppercase; transition: all 0.2s; letter-spacing: 1px; text-align: center; }
 
-        /* 三个安全标签自适应横排 */
-        .badges { display: flex; justify-content: space-between; margin-top: 20px; font-size: 0.72rem; color: #618771; font-weight: 600; padding: 0 5px; gap: 5px; }
+        .badges { display: flex; justify-content: space-between; margin-top: 20px; font-size: 0.7rem; color: #618771; font-weight: 600; padding: 0 5px; gap: 5px; }
         .badge-item { display: flex; align-items: center; gap: 3px; white-space: nowrap; }
 
-        footer { background: rgba(3, 20, 10, 0.95); margin-top: auto; padding: 25px 15px; font-size: 0.7rem; color: #3c5446; width: 100%; text-align: center; border-top: 1px solid rgba(255,255,255,0.02); max-width: 500px;}
+        footer { background: rgba(3, 20, 10, 0.95); margin-top: auto; padding: 25px 15px; font-size: 0.68rem; color: #3c5446; width: 100%; text-align: center; border-top: 1px solid rgba(255,255,255,0.02); max-width: 500px;}
         footer a { color: #52735f; text-decoration: none; margin: 0 5px; }
 
-        /* 针对超小屏幕手机（如 iPhone SE）的特定微调 */
         @media (max-width: 350px) {
-            .headline { font-size: 1.25rem; }
-            .subheadline { font-size: 0.8rem; }
-            .wheel-wrapper { max-width: 260px; }
-            .pointer { width: 50px; height: 50px; font-size: 0.85rem; }
-            .pointer::after { top: -12px; left: 12px; border-bottom: 15px solid #ffe066; }
-            .badges { font-size: 0.65rem; }
+            .wheel-wrapper { max-width: 250px; }
+            .pointer { width: 48px; height: 48px; font-size: 0.8rem; }
+            .pointer::after { top: -11px; left: 11px; border-bottom: 14px solid #ffe066; }
+            .badges { font-size: 0.62rem; }
         }
     </style>
 </head>
@@ -157,14 +157,13 @@
 
     <header>
         <div class="logo">RITZ99</div>
-        <div style="color: #00ff66; font-size: 0.75rem; font-weight: bold; background: rgba(0,255,102,0.1); padding: 4px 8px; border-radius: 12px; border: 1px solid rgba(0,255,102,0.2);">● LUCKY SPIN</div>
+        <div style="color: #00ff66; font-size: 0.72rem; font-weight: bold; background: rgba(0,255,102,0.1); padding: 4px 8px; border-radius: 12px; border: 1px solid rgba(0,255,102,0.2);">● LUCKY SPIN</div>
     </header>
 
     <div class="main-container">
-        <img src="https://static.gwvkyk.com/media/7c6a84e18f4a68652eee2.png" alt="RITZ99 Promotion" class="promo-banner">
-
-        <h1 class="headline">MAIN SEKARANG,<br>HADIAH MISTERI <span class="highlight">MENANTI ANDA!</span></h1>
-        <p class="subheadline">Putar roda secara percuma & tebus 50% Welcome Bonus anda sekarang!</p>
+        <a href="https://ritz99.net/RFR99F1" class="banner-link" id="banner-trigger">
+            <img src="https://static.gwvkyk.com/media/7c6a84e18f4a68652eee2.png" alt="RITZ99 Promotion" class="promo-banner">
+        </a>
 
         <div class="wheel-wrapper">
             <div class="pointer" id="spin-trigger">SPIN</div>
@@ -195,6 +194,7 @@
         const canvas = document.getElementById('wheel');
         const ctx = canvas.getContext('2d');
         const spinTrigger = document.getElementById('spin-trigger');
+        const bannerTrigger = document.getElementById('banner-trigger');
         const resultPop = document.getElementById('result-pop');
         const wheelEl = document.getElementById('wheel');
 
@@ -218,43 +218,4 @@
                 ctx.arc(160, 160, 150, angle, nextAngle);
                 ctx.fillStyle = colors[i];
                 ctx.fill();
-                ctx.lineWidth = 1.5;
-                ctx.strokeStyle = 'rgba(212, 175, 55, 0.4)';
-                ctx.stroke();
-
-                ctx.save();
-                ctx.translate(160, 160);
-                ctx.rotate(angle + (segmentAngle * Math.PI) / 360);
-                ctx.fillStyle = i === 0 ? '#ffcc00' : '#ffffff';
-                ctx.font = 'bold 11px Arial';
-                ctx.textAlign = 'right';
-                ctx.fillText(rewards[i], 140, 4);
-                ctx.restore();
-            }
-            
-            ctx.beginPath();
-            ctx.arc(160, 160, 153, 0, 2 * Math.PI);
-            ctx.lineWidth = 4;
-            ctx.strokeStyle = '#d4af37';
-            ctx.stroke();
-        }
-
-        drawWheel();
-
-        let isSpinning = false;
-        spinTrigger.addEventListener('click', () => {
-            if (isSpinning) return;
-            isSpinning = true;
-            
-            // 埋点触发：只要用户点下指针，Meta Pixel 抓取一次 Lead
-            if(typeof fbq === 'function') { fbq('track', 'Lead'); }
-
-            // 核心修改：去掉原先转动4.5秒再弹出的延迟，点击一瞬间直接把中奖弹窗展示出来！
-            resultPop.style.display = 'flex';
-            
-            // 同时触发像素完整注册事件
-            if(typeof fbq === 'function') { fbq('track', 'CompleteRegistration'); }
-        });
-    </script>
-</body>
-</html>
+                ctx.lineWidth = 1.5
