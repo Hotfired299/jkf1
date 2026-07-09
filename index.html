@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="ms">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <!-- 强制移动端 1:1 比例渲染，防止用户双击导致画面缩放错位 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>RITZ99 // OFFICIAL PARTNER</title>
     
@@ -14,137 +15,266 @@
       t.src=v;s=b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t,s)}(window, document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', 'XXXXXXXXXXXXXXX'); /* 请在此处替换您的真实像素ID */
+      fbq('init', 'XXXXXXXXXXXXXXX'); 
       fbq('track', 'PageView');
     </script>
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
         
-        /* 消除移动端点击元素时的系统默认蓝色高亮或边框 */
+        /* 消除移动端点击元素时的系统默认蓝色高亮边框，提升原生 App 体感 */
         input, textarea, button, a, div { -webkit-tap-highlight-color: rgba(0,0,0,0); outline: none; }
 
         body { 
-            background-color: #03140a; 
+            background-color: #05160e; 
             color: #ffffff; 
             overflow-x: hidden; 
+            background-image: radial-gradient(circle, rgba(0,255,100,0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
         }
         
-        /* 全屏背景磨砂融合 */
-        .bg-layer {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: url('https://static.gwvkyk.com/media/7c6a84e18f4a68652eee2.png') no-repeat center top;
-            background-size: cover;
-            opacity: 0.10; 
-            z-index: -1;
-        }
+        header { width: 100%; padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0, 255, 100, 0.2); max-width: 600px; }
+        .logo { font-size: 24px; font-weight: bold; color: #00ff66; text-shadow: 0 0 10px #00ff66; }
         
-        header { 
-            width: 100%; 
-            padding: 12px 20px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2); 
-            max-width: 500px; 
-            background: rgba(3, 20, 10, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-        .logo { 
-            font-size: 20px; 
-            font-weight: bold; 
-            color: #d4af37; 
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.6); 
-            letter-spacing: 1px;
-        }
+        .main-container { max-width: 600px; width: 100%; padding: 20px; text-align: center; flex: 1; }
         
-        .main-container { 
-            max-width: 500px; 
-            width: 100%; 
-            padding: 15px; 
-            text-align: center; 
-            flex: 1;
-            background: rgba(3, 20, 10, 0.5); 
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-        }
-        
-        /* 大图直达锚点样式 */
-        .banner-link {
-            display: block;
-            width: 100%;
-            text-decoration: none;
-            margin-bottom: 25px; /* 与下方转盘保持黄金间距 */
-        }
-        
-        .promo-banner {
-            width: 100%; 
-            height: auto; 
-            border-radius: 10px;
-            border: 2px solid #d4af37; 
-            box-shadow: 0 0 18px rgba(0, 255, 102, 0.25);
-            display: block;
-            transition: transform 0.2s;
-        }
-        .promo-banner:active {
-            transform: scale(0.98); 
-        }
+        /* 标语区 */
+        .headline { font-size: 1.8rem; margin: 20px 0 10px 0; color: #fff; font-weight: 800; }
+        .subheadline { font-size: 1rem; color: #a0c0b0; margin-bottom: 30px; }
+        .highlight { color: #ffcc00; text-shadow: 0 0 5px #ffcc00; }
 
-        /* 转盘自适应包裹区 */
-        .wheel-wrapper { 
-            position: relative; 
-            width: 100%; 
-            max-width: 290px; 
-            margin: 0 auto 25px auto; 
-        }
+        /* 幸运大转盘基础结构 */
+        .wheel-wrapper { position: relative; width: 320px; height: 320px; margin: 0 auto 40px auto; }
         
-        #wheel { 
-            width: 100%; 
-            height: auto; 
-            display: block;
-            transition: transform 3.5s cubic-bezier(0.1, 0.8, 0.1, 1); /* 高级物理阻尼感，前快后慢 */
-        }
+        /* 增加平滑的物理阻尼效果：前快后慢 */
+        #wheel { width: 100%; height: 100%; transform: rotate(0deg); transition: transform 4s cubic-bezier(0.1, 0.8, 0.1, 1); }
         
+        /* 指针 */
         .pointer { 
-            position: absolute; width: 58px; height: 58px; 
+            position: absolute; width: 60px; height: 60px; 
             top: 50%; left: 50%; transform: translate(-50%, -50%); 
             z-index: 10; cursor: pointer;
-            background: linear-gradient(135deg, #ffe066, #d4af37); border-radius: 50%;
+            background: #ffcc00; border-radius: 50%;
             display: flex; justify-content: center; align-items: center;
-            font-weight: 900; color: #03140a; font-size: 0.9rem;
-            box-shadow: 0 0 15px #d4af37; border: 3px solid #ffffff;
+            font-weight: bold; color: #000; font-size: 0.9rem;
+            box-shadow: 0 0 15px #ffcc00;
+            border: 3px solid #fff;
             user-select: none;
         }
         .pointer::after {
-            content: ''; position: absolute; top: -13px; left: 16px;
+            content: ''; position: absolute; top: -15px; left: 17px;
             width: 0; height: 0;
-            border-left: 10px solid transparent; border-right: 10px solid transparent;
-            border-bottom: 17px solid #ffe066;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 18px solid #ffcc00;
         }
 
-        /* 全屏中奖催单弹窗 */
-        .pop-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.94); z-index: 100; display: none; justify-content: center; align-items: center; padding: 15px; }
-        .pop-box { background: #072213; border: 2px solid #d4af37; border-radius: 12px; padding: 30px 20px; text-align: center; max-width: 350px; width: 100%; box-shadow: 0 0 35px rgba(212,175,55,0.4); animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        @keyframes popIn { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        /* 弹窗样式 */
+        .pop-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 100; display: none; justify-content: center; align-items: center; padding: 20px; }
+        .pop-box { background: #0c2b1c; border: 2px solid #00ff66; border-radius: 12px; padding: 30px; text-align: center; max-width: 400px; width: 100%; box-shadow: 0 0 30px rgba(0,255,100,0.3); animation: popIn 0.3s ease; }
+        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         
-        .pop-box h2 { color: #ffcc00; font-size: 2rem; margin-bottom: 10px; text-shadow: 0 0 15px rgba(255,204,0,0.6); font-weight: 900; }
-        .pop-box p { color: #ffffff; margin-bottom: 25px; font-size: 1rem; line-height: 1.5; }
+        .pop-box h2 { color: #ffcc00; font-size: 2rem; margin-bottom: 15px; text-shadow: 0 0 10px rgba(255,204,0,0.5); }
+        .pop-box p { color: #fff; margin-bottom: 25px; font-size: 1.1rem; line-height: 1.5; }
         
-        .btn-claim { display: block; width: 100%; padding: 14px; background: linear-gradient(90deg, #ffe066, #d4af37); color: #03140a; font-size: 1.15rem; font-weight: bold; text-decoration: none; border-radius: 8px; box-shadow: 0 5px 15px rgba(212,175,55,0.4); text-transform: uppercase; transition: all 0.2s; letter-spacing: 1px; text-align: center; }
+        .btn-claim { display: block; width: 100%; padding: 15px; background: linear-gradient(90deg, #ffcc00, #ff9900); color: #000; font-size: 1.2rem; font-weight: bold; text-decoration: none; border-radius: 6px; box-shadow: 0 5px 15px rgba(255,153,0,0.4); text-transform: uppercase; transition: all 0.2s; text-align: center;}
+        .btn-claim:active { transform: translateY(1px); }
 
-        .badges { display: flex; justify-content: space-between; margin-top: 20px; font-size: 0.7rem; color: #618771; font-weight: 600; padding: 0 5px; gap: 5px; }
-        .badge-item { display: flex; align-items: center; gap: 3px; white-space: nowrap; }
+        /* 特性标签 */
+        .badges { display: flex; justify-content: space-around; margin-top: 20px; font-size: 0.8rem; color: #608070; }
+        .badge-item { display: flex; align-items: center; gap: 5px; }
 
-        footer { background: rgba(3, 20, 10, 0.95); margin-top: auto; padding: 25px 15px; font-size: 0.68rem; color: #3c5446; width: 100%; text-align: center; border-top: 1px solid rgba(255,255,255,0.02); max-width: 500px;}
-        footer a { color: #52735f; text-decoration: none; margin: 0 5px; }
+        footer { margin-top: auto; padding: 30px 20px; font-size: 0.75rem; color: #40554b; width: 100%; text-align: center; border-top: 1px solid rgba(255,255,255,0.02); max-width: 600px;}
+        footer a { color: #608070; text-decoration: none; margin: 0 5px; }
+    </style>
+</head>
+<body>
 
-        @media (max-width: 350px) {
-            .wheel-wrapper { max-width: 250px; }
-            .pointer { width: 48px; height: 48px; font-size: 0.8rem; }
-            .pointer::after
+    <header>
+        <div class="logo">RITZ99</div>
+        <div style="color: #00ff66; font-size: 0.8rem; font-weight: bold; background: rgba(0,255,102,0.1); padding: 4px 8px; border-radius: 12px; border: 1px solid rgba(0,255,102,0.2);">● LUCKY SPIN</div>
+    </header>
+
+    <div class="main-container">
+        <h1 class="headline">MAIN SEKARANG,<br>HADIAH MISTERI <span class="highlight">MENANTI ANDA!</span></h1>
+        <p class="subheadline">Putar roda secara percuma & tebus bonus eksklusif anda hari ini!</p>
+
+        <div class="wheel-wrapper">
+            <div class="pointer" id="spin-trigger">SPIN</div>
+            <canvas id="wheel" width="320" height="320"></canvas>
+        </div>
+
+        <div class="badges">
+            <div class="badge-item">🔒 SAFE & SECURE</div>
+            <div class="badge-item">⚡ INSTANT TOP UP</div>
+            <div class="badge-item">⭐ TRUSTED PLATFORM</div>
+        </div>
+    </div>
+
+    <div class="pop-overlay" id="result-pop">
+        <div class="pop-box">
+            <h2>TAHNIAH! 🎉</h2>
+            <p>Anda telah memenangi:<br><span style="font-size: 1.8rem; font-weight: 800; color: #00ff66; display:block; margin: 10px 0;">50% WELCOME BONUS</span></p>
+            <a href="https://ritz99.net/RFR99F1" class="btn-claim" id="claim-link">CLAIM NOW</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>Disclaimer: This game is for leisure simulation purposes only. Must be 18 years or older to play.</p>
+        <p style="margin-top: 5px;"><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('wheel');
+        const ctx = canvas.getContext('2d');
+        const spinTrigger = document.getElementById('spin-trigger');
+        const resultPop = document.getElementById('result-pop');
+        const wheelEl = document.getElementById('wheel');
+
+        // 音频上下文管理器（用户点击一瞬间绕过系统静音保护）
+        let audioCtx = null;
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        // 模拟转盘转动时的清脆“哒哒哒”阻尼切音
+        function playTickSound() {
+            if (!audioCtx) return;
+            try {
+                let osc = audioCtx.createOscillator();
+                let gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(580, audioCtx.currentTime); 
+                osc.frequency.exponentialRampToValueAtTime(150, audioCtx.currentTime + 0.04);
+                gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.04);
+            } catch (e) {}
+        }
+
+        // 模拟 Jackpot 爆灯大奖时的连音和弦声
+        function playWinSound() {
+            if (!audioCtx) return;
+            try {
+                let now = audioCtx.currentTime;
+                let osc = audioCtx.createOscillator();
+                let gain = audioCtx.createGain();
+                osc.type = 'triangle'; // 使用质感更加饱满的三角波
+                
+                // 模拟经典的连续电子上升音阶效果 (C5 -> E5 -> G5 -> C6)
+                osc.frequency.setValueAtTime(523.25, now);
+                osc.frequency.setValueAtTime(659.25, now + 0.1);
+                osc.frequency.setValueAtTime(783.99, now + 0.2);
+                osc.frequency.setValueAtTime(1046.50, now + 0.3);
+                
+                gain.gain.setValueAtTime(0.25, now);
+                gain.gain.linearRampToValueAtTime(0.001, now + 0.6);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(now + 0.6);
+            } catch (e) {}
+        }
+
+        // 奖项配置
+        const rewards = [
+            "50% WELCOME", "DAILY FREE", "RM15 BONUS", "WEEKLY REBATE",
+            "RM10 SHARE", "DAILY 20%", "MONTHLY FREE", "TRY AGAIN"
+        ];
+        const colors = ['#0c2b1c', '#14422b', '#0c2b1c', '#14422b', '#0c2b1c', '#14422b', '#0c2b1c', '#14422b'];
+        const numSegments = rewards.length;
+        const segmentAngle = 360 / numSegments;
+
+        // 绘制转盘
+        function drawWheel() {
+            ctx.clearRect(0, 0, 320, 320);
+            for (let i = 0; i < numSegments; i++) {
+                const angle = (i * segmentAngle * Math.PI) / 180;
+                const nextAngle = ((i + 1) * segmentAngle * Math.PI) / 180;
+
+                ctx.beginPath();
+                ctx.moveTo(160, 160);
+                ctx.arc(160, 160, 150, angle, nextAngle);
+                ctx.fillStyle = colors[i];
+                ctx.fill();
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = '#00ff66';
+                ctx.stroke();
+
+                // 绘制文字
+                ctx.save();
+                ctx.translate(160, 160);
+                ctx.rotate(angle + (segmentAngle * Math.PI) / 360);
+                ctx.fillStyle = '#ffffff';
+                ctx.font = 'bold 11px Arial';
+                ctx.textAlign = 'right';
+                ctx.fillText(rewards[i], 140, 5);
+                ctx.restore();
+            }
+            
+            // 外圈发光边框
+            ctx.beginPath();
+            ctx.arc(160, 160, 152, 0, 2 * Math.PI);
+            ctx.lineWidth = 4;
+            ctx.strokeStyle = '#ffcc00';
+            ctx.stroke();
+        }
+
+        drawWheel();
+
+        // 点击抽奖逻辑
+        let isSpinning = false;
+        spinTrigger.addEventListener('click', () => {
+            if (isSpinning) return;
+            isSpinning = true;
+            
+            // 初始化声音系统
+            initAudio();
+            
+            // 触发 Meta Pixel 追踪
+            if(typeof fbq === 'function') { fbq('track', 'Lead'); }
+
+            // 核心锁死逻辑：强制停在第一个奖项 "50% WELCOME"
+            const targetDegrees = 1800 + (360 - (segmentAngle / 2)); 
+            wheelEl.style.transform = `rotate(${targetDegrees}deg)`;
+
+            // 根据阻尼动画曲线，动态在前中期播放高频“哒哒哒”声音
+            let tickCount = 0;
+            let tickInterval = setInterval(() => {
+                if (tickCount < 28) {
+                    playTickSound();
+                    tickCount++;
+                } else {
+                    clearInterval(tickInterval);
+                }
+            }, 85); 
+
+            // 在后期转盘极慢趋近停止时，补丁两下孤独的“哒...哒...”，增加极度逼真的物理等待感
+            setTimeout(() => { playTickSound(); }, 2800);
+            setTimeout(() => { playTickSound(); }, 3300);
+
+            // 4秒动画结束：精准播放中奖爆灯音效并弹窗
+            setTimeout(() => {
+                playWinSound(); // 触发爆分中奖声
+                resultPop.style.display = 'flex';
+                
+                if(typeof fbq === 'function') { fbq('track', 'CompleteRegistration'); }
+            }, 4000);
+        });
+
+        document.getElementById('claim-link').addEventListener('click', () => {
+            // 保留转化交接
+        });
+    </script>
+</body>
+</html>
