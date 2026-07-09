@@ -14,7 +14,7 @@
       t.src=v;s=b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t,s)}(window, document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', 'XXXXXXXXXXXXXXX'); /* 替换为你的真实像素ID */
+      fbq('init', 'XXXXXXXXXXXXXXX'); 
       fbq('track', 'PageView');
     </script>
     
@@ -53,11 +53,10 @@
             background: rgba(3, 20, 10, 0.5); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
         }
         
-        /* 大图直达链接 */
         .banner-link { display: block; width: 100%; text-decoration: none; margin-bottom: 20px; }
         .promo-banner { width: 100%; height: auto; border-radius: 10px; border: 2px solid #d4af37; box-shadow: 0 0 18px rgba(0, 255, 102, 0.25); display: block; }
 
-        /* ====== 高级 Slot 老虎机组件样式 ====== */
+        /* ====== Slot 机身架构 ====== */
         .slot-machine {
             background: linear-gradient(180deg, #144225, #072213);
             border: 4px solid #d4af37;
@@ -69,8 +68,61 @@
             position: relative;
         }
         
-        /* Slot 顶部的走马灯霓虹效果 */
         .slot-title {
             font-size: 1.1rem; font-weight: 900; color: #ffcc00; margin-bottom: 15px;
             text-shadow: 0 0 8px rgba(255,204,0,0.6); letter-spacing: 2px;
-            animation: blink 0
+            animation: blink 0.8s infinite alternate;
+        }
+        @keyframes blink { from { opacity: 0.6; } to { opacity: 1; } }
+
+        /* 滚轴可视窗口 */
+        .slot-reels-container {
+            display: flex;
+            justify-content: space-between;
+            background: #020d06;
+            padding: 10px;
+            border-radius: 8px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            overflow: hidden;
+            height: 90px; /* 锁定高度，确保只显示中间那一行 */
+        }
+
+        .reel {
+            width: 30%;
+            height: 100%;
+            background: linear-gradient(180deg, #0d2a18, #05140b);
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(212,175,55,0.2);
+        }
+
+        .reel-strip {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            transform: translateY(0);
+        }
+
+        /* 核心修改：抛弃系统Emoji，改用全兼容的精美纯文字标签，确保100%有显示 */
+        .slot-icon {
+            height: 70px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 900;
+            user-select: none;
+            color: #ffffff;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+        }
+        
+        /* 不同的水果/金币代号样式 */
+        .icon-bar { color: #aaa; font-size: 1.3rem; }
+        .icon-cherry { color: #ff3366; }
+        .icon-wild { color: #00ff66; text-shadow: 0 0 8px #00ff66; }
+        .icon-coin { color: #ffcc00; }
+        /*
