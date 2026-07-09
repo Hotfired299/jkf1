@@ -1,239 +1,234 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RITZ99 FIFA 2026</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{
-font-family:Arial,sans-serif;
-background:
-linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.75)),
-url('https://static.gwvkyk.com/media/0d2634fc913a6cbd5fc26.png');
-background-size:cover;
-background-position:center;
-color:#fff;overflow-x:hidden;min-height:100vh;
-}
-.hero{text-align:center;padding:40px 20px;position:relative}
-.logo{font-size:64px;font-weight:900;color:#3cff78;text-shadow:0 0 20px #3cff78}
-.trophy{position:absolute;left:5%;top:120px;font-size:120px}
-.player{position:absolute;right:5%;top:100px;font-size:140px}
-.ball{
-font-size:70px;display:inline-block;
-animation:spin 6s linear infinite;
-}
-@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-.title{
-font-size:clamp(38px,6vw,78px);
-font-weight:900;
-text-shadow:0 0 20px gold;
-margin-top:20px;
-}
-.subtitle{font-size:22px;margin-top:10px}
-.features{
-display:flex;justify-content:center;gap:25px;flex-wrap:wrap;
-margin:30px 0;
-}
-.feature{
-background:rgba(255,255,255,.12);
-padding:15px 25px;border-radius:15px;
-backdrop-filter:blur(5px);
-}
-.btn{
-display:inline-block;
-padding:18px 48px;
-font-size:28px;
-font-weight:bold;
-text-decoration:none;
-border-radius:50px;
-background:linear-gradient(90deg,#f7d36d,#d9a400);
-color:#111;
-box-shadow:0 0 25px rgba(255,215,0,.8);
-animation:pulse 2s infinite;
-}
-@keyframes pulse{
-50%{transform:scale(1.05)}
-}
-.bonus{
-margin-top:20px;
-font-size:36px;
-font-weight:900;
-color:#ffda44;
-}
-.flag{
-width:60px;
-height:40px;
-object-fit:cover;
-border-radius:8px;
-box-shadow:0 0 10px rgba(255,255,255,.3);
-flex-shrink:0;
-}
-.track{
-display:flex;gap:18px;width:max-content;
-animation:scroll 20s linear infinite;
-}
-.flag{font-size:54px;background:#fff;border-radius:10px;padding:8px 12px}
-@keyframes scroll{
-from{transform:translateX(0)}
-to{transform:translateX(-50%)}
-}
-.footer{
-position:fixed;bottom:15px;width:100%;
-text-align:center;font-weight:bold;
-}
-@media (max-width:768px){
-.flag{
-width:45px;
-height:30px;
-}
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RITZ99 // 终极博弈</title>
+    <style>
+        /* 基础样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
 
-.hero{
-padding:30px 15px 140px;
-}
+        body {
+            background-color: #0a051b;
+            color: #ffffff;
+            overflow-x: hidden;
+            background-image: linear-gradient(rgba(128, 0, 128, 0.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(128, 0, 128, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
 
-.logo{
-font-size:42px;
-}
+        /* 霓虹发光文字 */
+        .neon-text {
+            color: #fff;
+            text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #8a2be2;
+        }
 
-.trophy{
-left:10px;
-top:80px;
-font-size:60px;
-opacity:.85;
-}
+        /* 容器 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-.player{
-right:10px;
-top:80px;
-font-size:60px;
-opacity:.85;
-}
+        /* 第一屏 */
+        header {
+            padding: 30px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+        }
 
-.title{
-font-size:36px;
-line-height:1.1;
-margin-top:70px;
-padding:0 10px;
-}
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, #00ffff, #8a2be2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-.ball{
-font-size:48px;
-}
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+        }
 
-.bonus{
-font-size:28px;
-margin-top:15px;
-}
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+        }
 
-.subtitle{
-font-size:15px;
-line-height:1.5;
-padding:0 20px;
-}
+        .hero p {
+            font-size: 1.2rem;
+            color: #b0a8d4;
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+            line-height: 1.6;
+        }
 
-.features{
-gap:10px;
-margin:20px 0;
-}
+        /* 赛博朋克按钮 */
+        .btn-cyber {
+            display: inline-block;
+            padding: 15px 40px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #00ffff;
+            border: 2px solid #00ffff;
+            background: transparent;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
 
-.feature{
-width:48%;
-padding:12px 8px;
-font-size:13px;
-text-align:center;
-}
+        .btn-cyber:hover {
+            color: #0a051b;
+            background: #00ffff;
+            box-shadow: 0 0 25px #00ffff;
+        }
 
-.btn{
-display:block;
-width:90%;
-max-width:320px;
-margin:25px auto 0;
-padding:16px;
-font-size:20px;
-}
+        /* 特性区域 */
+        .features {
+            padding: 80px 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
 
-.flags{
-bottom:45px;
-}
+        /* 磨砂玻璃卡片 */
+        .card {
+            background: rgba(13, 8, 34, 0.7);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            border-radius: 8px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
 
-.track{
-gap:10px;
-animation:scroll 15s linear infinite;
-}
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 3px;
+            background: linear-gradient(90deg, #00ffff, #8a2be2);
+        }
 
-.flag{
-font-size:28px;
-padding:5px 8px;
-}
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #00ffff;
+            box-shadow: 0 5px 20px rgba(0, 255, 255, 0.1);
+        }
 
-.footer{
-font-size:12px;
-bottom:10px;
-padding:0 10px;
-}
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #00ffff;
+        }
 
-}
-}
-</style>
+        .card p {
+            color: #a29bbd;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* 底部注册表单 */
+        .cta-section {
+            padding: 100px 0;
+            text-align: center;
+            background: linear-gradient(180deg, transparent, rgba(138, 43, 226, 0.1));
+            border-top: 1px solid rgba(138, 43, 226, 0.2);
+        }
+
+        .form-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .form-container input {
+            padding: 15px 20px;
+            width: 300px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #8a2be2;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .form-container input:focus {
+            outline: none;
+            border-color: #00ffff;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .btn-purple {
+            padding: 15px 30px;
+            background: #8a2be2;
+            color: white;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-purple:hover {
+            background: #a046f5;
+            box-shadow: 0 0 15px #8a2be2;
+        }
+    </style>
 </head>
 <body>
 
-<div class="hero">
-<div class="trophy">🏆</div>
-<div class="player">⚽</div>
+    <header>
+        <div class="container" style="display: flex; justify-content: space-between; width: 100%;">
+            <div class="logo">RITZ99</div>
+            <div style="color: #00ffff; font-size: 0.9rem; letter-spacing: 1px;">STATUS: ONLINE</div>
+        </div>
+    </header>
 
-<div class="logo">RITZ99</div>
+    <section class="hero">
+        <div class="container">
+            <h1 class="neon-text">RITZ99 // 触手可及的终极博弈</h1>
+            <p>拒绝平庸，加入属于顶尖玩家的电竞新纪元。策略、操作与速度的绝对较量，你准备好了吗？</p>
+            <a href="#join" class="btn-cyber">立即加入内测</a>
+        </div>
+    </section>
 
-<div class="title">FIFA WORLD CUP 2026</div>
+    <section class="container features">
+        <div class="card">
+            <h3>【 巅峰对决 】</h3>
+            <p>纯粹的竞技策略，拒绝数值压制。在每一次交锋中算计对手，每一步都是智商与心理的极致博弈。</p>
+        </div>
+        <div class="card">
+            <h3>【 赛博生态 】</h3>
+            <p>专为硬核玩家打造的数字化电竞社区。在这里用实力说话，赢取属于你的独家荣耀与数字资产。</p>
+        </div>
+        <div class="card">
+            <h3>【 瞬息万变 】</h3>
+            <p>完美融合卡牌、棋子与博弈宝石元素。战场局势瞬息万变，唯有洞察全局者方能笑到最后。</p>
+        </div>
+    </section>
 
-<div class="ball">⚽</div>
-
-<div class="bonus">WELCOME BONUS 50%</div>
-
-<p class="subtitle">Live Match • Fast Withdrawal • 24/7 Support</p>
-
-<div class="features">
-<div class="feature">⚽ Live Match</div>
-<div class="feature">🏆 World Cup Special</div>
-<div class="feature">💸 Fast Payout</div>
-<div class="feature">📱 Mobile Friendly</div>
-</div>
-
-<a class="btn" href="https://ritz99.net/RFR99F1">REGISTER NOW</a>
-</div>
-
-<div class="track">
-
-<img class="flag" src="https://flagcdn.com/w80/br.png" alt="Brazil">
-<img class="flag" src="https://flagcdn.com/w80/ar.png" alt="Argentina">
-<img class="flag" src="https://flagcdn.com/w80/fr.png" alt="France">
-<img class="flag" src="https://flagcdn.com/w80/de.png" alt="Germany">
-<img class="flag" src="https://flagcdn.com/w80/es.png" alt="Spain">
-<img class="flag" src="https://flagcdn.com/w80/pt.png" alt="Portugal">
-<img class="flag" src="https://flagcdn.com/w80/nl.png" alt="Netherlands">
-<img class="flag" src="https://flagcdn.com/w80/be.png" alt="Belgium">
-<img class="flag" src="https://flagcdn.com/w80/hr.png" alt="Croatia">
-<img class="flag" src="https://flagcdn.com/w80/jp.png" alt="Japan">
-<img class="flag" src="https://flagcdn.com/w80/kr.png" alt="South Korea">
-<img class="flag" src="https://flagcdn.com/w80/us.png" alt="USA">
-<img class="flag" src="https://flagcdn.com/w80/mx.png" alt="Mexico">
-<img class="flag" src="https://flagcdn.com/w80/ca.png" alt="Canada">
-<img class="flag" src="https://flagcdn.com/w80/au.png" alt="Australia">
-
-<!-- 重复一次让滚动无缝 -->
-<img class="flag" src="https://flagcdn.com/w80/br.png" alt="Brazil">
-<img class="flag" src="https://flagcdn.com/w80/ar.png" alt="Argentina">
-<img class="flag" src="https://flagcdn.com/w80/fr.png" alt="France">
-<img class="flag" src="https://flagcdn.com/w80/de.png" alt="Germany">
-<img class="flag" src="https://flagcdn.com/w80/es.png" alt="Spain">
-
-</div>
-</div>
-
-<div class="footer">© RITZ99 FIFA 2026 Campaign</div>
+    <section class="cta-section" id="join">
+        <div class="container">
+            <h2 style="font-size: 2rem; margin-bottom: 10px;">霓虹永不熄灭，传奇由你书写</h2>
+            <p style="color: #a29bbd;">立即留下联系方式，锁定首批核心测试席位。</p>
+            <div class="form-container">
+                <input type="email" placeholder="输入您的电子邮箱地址...">
+                <button class="btn-purple">锁定席位</button>
+            </div>
+        </div>
+    </section>
 
 </body>
 </html>
-
