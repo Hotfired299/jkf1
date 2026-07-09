@@ -2,10 +2,11 @@
 <html lang="ms">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 核心：强制移动端按1:1比例渲染，禁止用户意外放大导致排版错乱 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>RITZ99 // OFFICIAL PARTNER</title>
     
-    <!-- Meta Pixel 追踪代码 (请自行将 XXXXXXXXXXXXXXX 替换为你的像素 ID) -->
+    <!-- Meta Pixel 追踪代码 -->
     <script>
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -21,6 +22,10 @@
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        
+        /* 避免手机端点击元素时出现蓝色高亮边框 */
+        input, textarea, button, a, div { -webkit-tap-highlight-color: rgba(0,0,0,0); }
+
         body { 
             background-color: #03140a; 
             color: #ffffff; 
@@ -31,29 +36,30 @@
             min-height: 100vh;
         }
         
-        /* 全屏背景图融合 - 自动读取网络图 */
+        /* 背景图融合自适应 */
         .bg-layer {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: url('https://static.gwvkyk.com/media/7c6a84e18f4a68652eee2.png') no-repeat center top;
             background-size: cover;
-            opacity: 0.15; /* 审核期低透明度；过审后可调高至 0.8 体验更佳 */
+            opacity: 0.12; 
             z-index: -1;
         }
         
         header { 
             width: 100%; 
-            padding: 20px; 
+            padding: 15px 20px; 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
             border-bottom: 1px solid rgba(212, 175, 55, 0.2); 
-            max-width: 600px; 
-            background: rgba(3, 20, 10, 0.8);
+            max-width: 500px; /* 锁定黄金单手操作宽度 */
+            background: rgba(3, 20, 10, 0.85);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
         .logo { 
-            font-size: 24px; 
+            font-size: 22px; 
             font-weight: bold; 
             color: #d4af37; 
             text-shadow: 0 0 10px rgba(212, 175, 55, 0.6); 
@@ -61,57 +67,90 @@
         }
         
         .main-container { 
-            max-width: 600px; width: 100%; padding: 20px; text-align: center; flex: 1;
-            background: rgba(3, 20, 10, 0.6); backdrop-filter: blur(5px);
+            max-width: 500px; 
+            width: 100%; 
+            padding: 15px; 
+            text-align: center; 
+            flex: 1;
+            background: rgba(3, 20, 10, 0.6); 
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
         
-        /* 震撼宣传图主视觉 */
+        /* 完美自适应主图Banner */
         .promo-banner {
-            width: 100%; max-width: 100%; border-radius: 12px;
-            border: 2px solid #d4af37; box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
-            margin: 15px 0 25px 0; display: block;
+            width: 100%; 
+            height: auto; /* 关键：高度自动，防止小屏手机下图片被压扁 */
+            border-radius: 10px;
+            border: 2px solid #d4af37; 
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
+            margin: 5px 0 15px 0; 
+            display: block;
         }
         
-        .headline { font-size: 1.6rem; margin: 20px 0 10px 0; color: #ffffff; font-weight: 800; line-height: 1.3; }
-        .subheadline { font-size: 0.95rem; color: #a0c2b0; margin-bottom: 25px; }
+        .headline { font-size: 1.45rem; margin: 15px 0 8px 0; color: #ffffff; font-weight: 800; line-height: 1.3; }
+        .subheadline { font-size: 0.9rem; color: #a0c2b0; margin-bottom: 20px; padding: 0 10px; }
         .highlight { color: #ffcc00; text-shadow: 0 0 8px rgba(255, 204, 0, 0.6); }
 
-        /* 转盘包装区 */
-        .wheel-wrapper { position: relative; width: 320px; height: 320px; margin: 0 auto 30px auto; }
-        #wheel { width: 100%; height: 100%; transform: rotate(0deg); transition: transform 4.5s cubic-bezier(0.15, 0.85, 0.1, 1); }
+        /* 转盘包裹区自适应 */
+        .wheel-wrapper { 
+            position: relative; 
+            width: 100%; 
+            max-width: 310px; /* 限制最大尺寸防止在大屏上过大 */
+            margin: 0 auto 25px auto; 
+        }
+        
+        /* 让大转盘 Canvas 随手机屏幕宽度弹性缩小 */
+        #wheel { 
+            width: 100%; 
+            height: auto; 
+            display: block;
+            transform: rotate(0deg); 
+            transition: transform 4.5s cubic-bezier(0.15, 0.85, 0.1, 1); 
+        }
         
         .pointer { 
-            position: absolute; width: 66px; height: 66px; 
+            position: absolute; width: 60px; height: 60px; 
             top: 50%; left: 50%; transform: translate(-50%, -50%); 
             z-index: 10; cursor: pointer;
             background: linear-gradient(135deg, #ffe066, #d4af37); border-radius: 50%;
             display: flex; justify-content: center; align-items: center;
-            font-weight: 900; color: #03140a; font-size: 1rem;
-            box-shadow: 0 0 20px #d4af37; border: 3px solid #ffffff;
+            font-weight: 900; color: #03140a; font-size: 0.95rem;
+            box-shadow: 0 0 15px #d4af37; border: 3px solid #ffffff;
         }
         .pointer::after {
-            content: ''; position: absolute; top: -16px; left: 20px;
+            content: ''; position: absolute; top: -14px; left: 17px;
             width: 0; height: 0;
             border-left: 10px solid transparent; border-right: 10px solid transparent;
-            border-bottom: 20px solid #ffe066;
+            border-bottom: 18px solid #ffe066;
         }
 
-        /* 极致诱惑中奖弹窗 */
-        .pop-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 100; display: none; justify-content: center; align-items: center; padding: 20px; }
-        .pop-box { background: #072213; border: 2px solid #d4af37; border-radius: 14px; padding: 35px 25px; text-align: center; max-width: 400px; width: 100%; box-shadow: 0 0 35px rgba(212,175,55,0.4); animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        /* 中奖弹窗自适应 */
+        .pop-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.94); z-index: 100; display: none; justify-content: center; align-items: center; padding: 15px; }
+        .pop-box { background: #072213; border: 2px solid #d4af37; border-radius: 12px; padding: 30px 20px; text-align: center; max-width: 360px; width: 100%; box-shadow: 0 0 35px rgba(212,175,55,0.4); animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         @keyframes popIn { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         
-        .pop-box h2 { color: #ffcc00; font-size: 2.2rem; margin-bottom: 12px; text-shadow: 0 0 15px rgba(255,204,0,0.6); font-weight: 900; }
-        .pop-box p { color: #ffffff; margin-bottom: 30px; font-size: 1.1rem; line-height: 1.6; }
+        .pop-box h2 { color: #ffcc00; font-size: 2rem; margin-bottom: 10px; text-shadow: 0 0 15px rgba(255,204,0,0.6); font-weight: 900; }
+        .pop-box p { color: #ffffff; margin-bottom: 25px; font-size: 1rem; line-height: 1.5; }
         
-        .btn-claim { display: block; width: 100%; padding: 16px; background: linear-gradient(90deg, #ffe066, #d4af37); color: #03140a; font-size: 1.25rem; font-weight: bold; text-decoration: none; border-radius: 8px; box-shadow: 0 5px 20px rgba(212,175,55,0.4); text-transform: uppercase; transition: all 0.2s; letter-spacing: 1px; text-align: center; }
-        .btn-claim:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(212,175,55,0.6); }
+        .btn-claim { display: block; width: 100%; padding: 14px; background: linear-gradient(90deg, #ffe066, #d4af37); color: #03140a; font-size: 1.15rem; font-weight: bold; text-decoration: none; border-radius: 8px; box-shadow: 0 5px 15px rgba(212,175,55,0.4); text-transform: uppercase; transition: all 0.2s; letter-spacing: 1px; text-align: center; }
 
-        .badges { display: flex; justify-content: space-around; margin-top: 25px; font-size: 0.8rem; color: #618771; font-weight: 600; }
-        .badge-item { display: flex; align-items: center; gap: 6px; }
+        /* 三个安全标签自适应横排 */
+        .badges { display: flex; justify-content: space-between; margin-top: 20px; font-size: 0.72rem; color: #618771; font-weight: 600; padding: 0 5px; gap: 5px; }
+        .badge-item { display: flex; align-items: center; gap: 3px; white-space: nowrap; }
 
-        footer { background: rgba(3, 20, 10, 0.9); margin-top: auto; padding: 35px 20px; font-size: 0.75rem; color: #3c5446; width: 100%; text-align: center; border-top: 1px solid rgba(255,255,255,0.02); max-width: 600px;}
-        footer a { color: #52735f; text-decoration: none; margin: 0 8px; }
+        footer { background: rgba(3, 20, 10, 0.95); margin-top: auto; padding: 25px 15px; font-size: 0.7rem; color: #3c5446; width: 100%; text-align: center; border-top: 1px solid rgba(255,255,255,0.02); max-width: 500px;}
+        footer a { color: #52735f; text-decoration: none; margin: 0 5px; }
+
+        /* 针对超小屏幕手机（如 iPhone SE）的特定微调 */
+        @media (max-width: 350px) {
+            .headline { font-size: 1.25rem; }
+            .subheadline { font-size: 0.8rem; }
+            .wheel-wrapper { max-width: 260px; }
+            .pointer { width: 50px; height: 50px; font-size: 0.85rem; }
+            .pointer::after { top: -12px; left: 12px; border-bottom: 15px solid #ffe066; }
+            .badges { font-size: 0.65rem; }
+        }
     </style>
 </head>
 <body>
@@ -120,19 +159,20 @@
 
     <header>
         <div class="logo">RITZ99</div>
-        <div style="color: #00ff66; font-size: 0.8rem; font-weight: bold; background: rgba(0,255,102,0.1); padding: 4px 10px; border-radius: 12px; border: 1px solid rgba(0,255,102,0.2);">● LUCKY SPIN</div>
+        <div style="color: #00ff66; font-size: 0.75rem; font-weight: bold; background: rgba(0,255,102,0.1); padding: 4px 8px; border-radius: 12px; border: 1px solid rgba(0,255,102,0.2);">● LUCKY SPIN</div>
     </header>
 
     <div class="main-container">
-        <!-- 自动加载网络图片地址 -->
+        <!-- 自动适配各种屏幕尺寸的财神主视觉 -->
         <img src="https://static.gwvkyk.com/media/7c6a84e18f4a68652eee2.png" alt="RITZ99 Promotion" class="promo-banner">
 
         <h1 class="headline">MAIN SEKARANG,<br>HADIAH MISTERI <span class="highlight">MENANTI ANDA!</span></h1>
         <p class="subheadline">Putar roda secara percuma & tebus 50% Welcome Bonus anda sekarang!</p>
 
-        <!-- Canvas 转盘结构 -->
+        <!-- 自适应 Canvas 转盘结构 -->
         <div class="wheel-wrapper">
             <div class="pointer" id="spin-trigger">SPIN</div>
+            <!-- canvas原生宽高保持320用于保证画质清晰，css会负责缩小它 -->
             <canvas id="wheel" width="320" height="320"></canvas>
         </div>
 
@@ -143,18 +183,18 @@
         </div>
     </div>
 
-    <!-- 结果弹窗 -->
+    <!-- 中奖弹窗 -->
     <div class="pop-overlay" id="result-pop">
         <div class="pop-box">
             <h2>TAHNIAH! 🎉</h2>
-            <p>Anda telah memenangi ganjaran eksklusif:<br><span style="font-size: 1.9rem; font-weight: 900; color: #00ff66; display:block; margin: 12px 0; text-shadow: 0 0 10px rgba(0,0,0,0.4);">50% WELCOME BONUS</span></p>
+            <p>Anda telah memenangi ganjaran eksklusif:<br><span style="font-size: 1.7rem; font-weight: 900; color: #00ff66; display:block; margin: 10px 0; text-shadow: 0 0 10px rgba(0,0,0,0.4);">50% WELCOME BONUS</span></p>
             <a href="https://ritz99.net/RFR99F1" class="btn-claim" id="claim-link">CLAIM NOW</a>
         </div>
     </div>
 
     <footer>
         <p>Disclaimer: This platform provides leisure simulation and strategy dynamic games for entertainment purposes only. No real money gambling is involved. Users must be 18 years or older.</p>
-        <p style="margin-top: 8px;"><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        <p style="margin-top: 6px;"><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
     </footer>
 
     <script>
