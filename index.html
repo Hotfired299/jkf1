@@ -14,12 +14,14 @@
       t.src=v;s=b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t,s)}(window, document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', 'XXXXXXXXXXXXXXX'); 
+      fbq('init', 'XXXXXXXXXXXXXXX'); /* 请在此处替换您的真实像素ID */
       fbq('track', 'PageView');
     </script>
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        
+        /* 消除移动端点击元素时的系统默认蓝色高亮或边框 */
         input, textarea, button, a, div { -webkit-tap-highlight-color: rgba(0,0,0,0); outline: none; }
 
         body { 
@@ -32,6 +34,7 @@
             min-height: 100vh;
         }
         
+        /* 全屏背景磨砂融合 */
         .bg-layer {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -42,87 +45,106 @@
         }
         
         header { 
-            width: 100%; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; 
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2); max-width: 500px; background: rgba(3, 20, 10, 0.85);
-            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            width: 100%; 
+            padding: 12px 20px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2); 
+            max-width: 500px; 
+            background: rgba(3, 20, 10, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
-        .logo { font-size: 20px; font-weight: bold; color: #d4af37; text-shadow: 0 0 10px rgba(212, 175, 55, 0.6); letter-spacing: 1px; }
+        .logo { 
+            font-size: 20px; 
+            font-weight: bold; 
+            color: #d4af37; 
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.6); 
+            letter-spacing: 1px;
+        }
         
         .main-container { 
-            max-width: 500px; width: 100%; padding: 15px; text-align: center; flex: 1;
-            background: rgba(3, 20, 10, 0.5); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+            max-width: 500px; 
+            width: 100%; 
+            padding: 15px; 
+            text-align: center; 
+            flex: 1;
+            background: rgba(3, 20, 10, 0.5); 
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
         
-        .banner-link { display: block; width: 100%; text-decoration: none; margin-bottom: 20px; }
-        .promo-banner { width: 100%; height: auto; border-radius: 10px; border: 2px solid #d4af37; box-shadow: 0 0 18px rgba(0, 255, 102, 0.25); display: block; }
-
-        /* ====== Slot 机身架构 ====== */
-        .slot-machine {
-            background: linear-gradient(180deg, #144225, #072213);
-            border: 4px solid #d4af37;
-            border-radius: 16px;
-            padding: 20px 15px;
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.3), inset 0 0 15px rgba(0,0,0,0.5);
-            max-width: 340px;
-            margin: 0 auto 25px auto;
-            position: relative;
-        }
-        
-        .slot-title {
-            font-size: 1.1rem; font-weight: 900; color: #ffcc00; margin-bottom: 15px;
-            text-shadow: 0 0 8px rgba(255,204,0,0.6); letter-spacing: 2px;
-            animation: blink 0.8s infinite alternate;
-        }
-        @keyframes blink { from { opacity: 0.6; } to { opacity: 1; } }
-
-        /* 滚轴可视窗口 */
-        .slot-reels-container {
-            display: flex;
-            justify-content: space-between;
-            background: #020d06;
-            padding: 10px;
-            border-radius: 8px;
-            border: 2px solid rgba(212, 175, 55, 0.3);
-            overflow: hidden;
-            height: 90px; /* 锁定高度，确保只显示中间那一行 */
-        }
-
-        .reel {
-            width: 30%;
-            height: 100%;
-            background: linear-gradient(180deg, #0d2a18, #05140b);
-            border-radius: 6px;
-            overflow: hidden;
-            position: relative;
-            border: 1px solid rgba(212,175,55,0.2);
-        }
-
-        .reel-strip {
-            position: absolute;
-            top: 0;
-            left: 0;
+        /* 大图直达锚点样式 */
+        .banner-link {
+            display: block;
             width: 100%;
-            display: flex;
-            flex-direction: column;
-            transform: translateY(0);
-        }
-
-        /* 核心修改：抛弃系统Emoji，改用全兼容的精美纯文字标签，确保100%有显示 */
-        .slot-icon {
-            height: 70px; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.5rem;
-            font-weight: 900;
-            user-select: none;
-            color: #ffffff;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+            text-decoration: none;
+            margin-bottom: 25px; /* 与下方转盘保持黄金间距 */
         }
         
-        /* 不同的水果/金币代号样式 */
-        .icon-bar { color: #aaa; font-size: 1.3rem; }
-        .icon-cherry { color: #ff3366; }
-        .icon-wild { color: #00ff66; text-shadow: 0 0 8px #00ff66; }
-        .icon-coin { color: #ffcc00; }
-        /*
+        .promo-banner {
+            width: 100%; 
+            height: auto; 
+            border-radius: 10px;
+            border: 2px solid #d4af37; 
+            box-shadow: 0 0 18px rgba(0, 255, 102, 0.25);
+            display: block;
+            transition: transform 0.2s;
+        }
+        .promo-banner:active {
+            transform: scale(0.98); 
+        }
+
+        /* 转盘自适应包裹区 */
+        .wheel-wrapper { 
+            position: relative; 
+            width: 100%; 
+            max-width: 290px; 
+            margin: 0 auto 25px auto; 
+        }
+        
+        #wheel { 
+            width: 100%; 
+            height: auto; 
+            display: block;
+            transition: transform 3.5s cubic-bezier(0.1, 0.8, 0.1, 1); /* 高级物理阻尼感，前快后慢 */
+        }
+        
+        .pointer { 
+            position: absolute; width: 58px; height: 58px; 
+            top: 50%; left: 50%; transform: translate(-50%, -50%); 
+            z-index: 10; cursor: pointer;
+            background: linear-gradient(135deg, #ffe066, #d4af37); border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            font-weight: 900; color: #03140a; font-size: 0.9rem;
+            box-shadow: 0 0 15px #d4af37; border: 3px solid #ffffff;
+            user-select: none;
+        }
+        .pointer::after {
+            content: ''; position: absolute; top: -13px; left: 16px;
+            width: 0; height: 0;
+            border-left: 10px solid transparent; border-right: 10px solid transparent;
+            border-bottom: 17px solid #ffe066;
+        }
+
+        /* 全屏中奖催单弹窗 */
+        .pop-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.94); z-index: 100; display: none; justify-content: center; align-items: center; padding: 15px; }
+        .pop-box { background: #072213; border: 2px solid #d4af37; border-radius: 12px; padding: 30px 20px; text-align: center; max-width: 350px; width: 100%; box-shadow: 0 0 35px rgba(212,175,55,0.4); animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        @keyframes popIn { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        
+        .pop-box h2 { color: #ffcc00; font-size: 2rem; margin-bottom: 10px; text-shadow: 0 0 15px rgba(255,204,0,0.6); font-weight: 900; }
+        .pop-box p { color: #ffffff; margin-bottom: 25px; font-size: 1rem; line-height: 1.5; }
+        
+        .btn-claim { display: block; width: 100%; padding: 14px; background: linear-gradient(90deg, #ffe066, #d4af37); color: #03140a; font-size: 1.15rem; font-weight: bold; text-decoration: none; border-radius: 8px; box-shadow: 0 5px 15px rgba(212,175,55,0.4); text-transform: uppercase; transition: all 0.2s; letter-spacing: 1px; text-align: center; }
+
+        .badges { display: flex; justify-content: space-between; margin-top: 20px; font-size: 0.7rem; color: #618771; font-weight: 600; padding: 0 5px; gap: 5px; }
+        .badge-item { display: flex; align-items: center; gap: 3px; white-space: nowrap; }
+
+        footer { background: rgba(3, 20, 10, 0.95); margin-top: auto; padding: 25px 15px; font-size: 0.68rem; color: #3c5446; width: 100%; text-align: center; border-top: 1px solid rgba(255,255,255,0.02); max-width: 500px;}
+        footer a { color: #52735f; text-decoration: none; margin: 0 5px; }
+
+        @media (max-width: 350px) {
+            .wheel-wrapper { max-width: 250px; }
+            .pointer { width: 48px; height: 48px; font-size: 0.8rem; }
+            .pointer::after
